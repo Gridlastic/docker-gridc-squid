@@ -14,12 +14,21 @@ export GRIDC_ACCESS_KEY=<your Gridlastic grid access_key>
 export GRIDC_REMOTE_PORT=9999
 
 
-Windows
+Windows (CMD)
 set GRIDC_ENDPOINT_SUBDOMAIN=<your Gridlastic Connect subdomain>
 set GRIDC_USERNAME=<your Gridlastic grid username>
 set GRIDC_ACCESS_KEY=<your Gridlastic grid access_key>
 set GRIDC_REMOTE_PORT=9999
+
+
+Windows (Powershell)
+$Env:GRIDC_ENDPOINT_SUBDOMAIN = "<your Gridlastic Connect subdomain>"
+$Env:GRIDC_USERNAME = "<your Gridlastic grid username>"
+$Env:GRIDC_ACCESS_KEY = "<your Gridlastic grid access_key>"
+$Env:GRIDC_REMOTE_PORT = 9999
 ```
+Port `9999` is just an example select any between `9000-9999` that is available.
+
 Start:
 
     $ docker-compose up
@@ -41,10 +50,17 @@ and then access a web site like:
 
 
 
-Port `9999` is just an example select any between `9000-9999` that is available. Read more about using a [Squid proxy][gridlastic-squid-proxy] in your selenium testing.
+You can also access a local site like:
 
 
+    $ driver().get("https://host.docker.internal");
+    
+When accessing a local https site serving valid or self signed ssl, the domain names do not match so the browser displays a certificate error message which can be resolved by adding flags to your selenium code like for Chrome:
 
+    $ options.addArguments("ignore-certificate-errors");
+    
+Read more about using a [Squid proxy][gridlastic-squid-proxy] in your selenium testing.
+ 
 ## Feedback
 
 Report issues/questions/feature requests at `support@gridlastic.com`.
