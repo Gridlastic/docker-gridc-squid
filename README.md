@@ -27,7 +27,8 @@ $Env:GRIDC_USERNAME = "<your Gridlastic grid username>"
 $Env:GRIDC_ACCESS_KEY = "<your Gridlastic grid access_key>"
 $Env:GRIDC_REMOTE_PORT = 9999
 ```
-Port `9999` is just an example select any between `9000-9999` that is available.
+Port `9999` is just an example, select any port between `9000-9999` that is not in use by another tunnel or leave empty for a random port assignment.  
+
 
 Start:
 
@@ -43,8 +44,14 @@ proxy.setHttpProxy(proxy_server).setFtpProxy(proxy_server).setSslProxy(proxy_ser
 capabilities.setCapability(CapabilityType.PROXY, proxy)
 ```
 
+In this case the port `9999` was used but if you left it empty, retrieve the port assigned using the [Rest API][gridlastic-connect-api] like:
 
-and then access a web site like:
+```
+http://localhost:3030/api/tunnel?name=squid_proxy
+```
+
+
+and then in your selenium code, access a web site like:
 
     $ driver().get("https://google.com");
 
@@ -68,3 +75,4 @@ Report issues/questions/feature requests at `support@gridlastic.com`.
 
 [gridlastic]:       	https://www.gridlastic.com/
 [gridlastic-squid-proxy]:       	https://www.gridlastic.com/gridlastic-connect.html#squid
+[gridlastic-connect-api]:	https://www.gridlastic.com/gridlastic-connect.html#dynamic_tunnel_creation

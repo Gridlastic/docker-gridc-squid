@@ -5,6 +5,8 @@ services:
 
   gridc-tunnel-to-squid:
     image: gridlastic/docker-gridc
+    ports:
+      - "3030:3030"
     volumes:
       - ./custom-config-template.cfg:/home/gridc/config-template.cfg
     environment:
@@ -12,4 +14,5 @@ services:
       GRIDC_USERNAME: ${GRIDC_USERNAME}
       GRIDC_ACCESS_KEY: ${GRIDC_ACCESS_KEY}
       GRIDC_REMOTE_PORT: ${GRIDC_REMOTE_PORT}
+      GRIDC_API: 3030
       GRIDC_START_CONFIG_TUNNELS: all
